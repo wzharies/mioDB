@@ -1,6 +1,6 @@
 #!/bin/bash
 # the absolute path of "outfilepath" in auto.sh
-result_dir="/home/jbyao/auto_result"
+result_dir="/home/wzh/mioDB/auto_result"
 echo "-------------------------------------------------------------------------------------------------------"
 echo "Figure 6: The performance of in-memory MioDB using micro-benchmarks"
 echo "the order is 1KB, 4KB, 16KB, 64KB"

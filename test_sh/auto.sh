@@ -1,11 +1,11 @@
 # save .log LOG CURRENT MANIFEST...
-db_path="/mnt/persist-memory/nvm"
+db_path="/mnt/pmem0.1/pm_test_mio"
 # output file dir
-outfilepath="/home/jbyao/auto_result"
+outfilepath="/home/wzh/mioDB/auto_result"
 # output file
 outfile="$outfilepath/result.out"
 # db_bench binary path
-bench_path="/home/jbyao/mioDB/build"
+bench_path="/home/wzh/mioDB/build"
 # value size (Byte)
 size="4096"
 # write KV num, test_size / size
@@ -19,15 +19,15 @@ comp_ratio="1"
 # dram node in numa
 numa_dram_node=0
 # nvm node in numa
-numa_nvm_node=4
+numa_nvm_node=2
 # nvm next node in numa, we can use -1 to disable this
 numa_nvm_next_node=-1
 # the size of memtable in dram (Byte)
 write_buffer_size=67108864
 # the absolute path of excutable ycsbc
-ycsbc_path="/home/jbyao/ycsb_mio/ycsbc"
+ycsbc_path="/home/wzh/mioDB/ycsbc/ycsbc"
 # the absolute path of ycsb input
-input_path="/home/jbyao/ycsb_mio/input"
+input_path="/home/wzh/mioDB/ycsbc/input"
 
 CLEAN_DB_PATH() {
     if [ -d "$db_path" ];then
@@ -65,62 +65,62 @@ RUN_ONE_TEST() {
 
 CREATE_OUTPUT_FILE_PATH
 
-echo "------------db_bench------------"
-echo "------1KB random write/read-----"
-write_key_num="80000000"
-size="1024"
-test_type="fillrandom,readrandom"
-outfile="$outfilepath/db_bench_random_1KB.out"
-RUN_ONE_TEST
+# echo "------------db_bench------------"
+# echo "------1KB random write/read-----"
+# write_key_num="80000000"
+# size="1024"
+# test_type="fillrandom,readrandom"
+# outfile="$outfilepath/db_bench_random_1KB.out"
+# RUN_ONE_TEST
 
-echo "------4KB random write/read-----"
-write_key_num="20000000"
-size="4096"
-test_type="fillrandom,stats,readrandom,stats,wait,stats"
-outfile="$outfilepath/db_bench_random_4KB.out"
-RUN_ONE_TEST
+# echo "------4KB random write/read-----"
+# write_key_num="20000000"
+# size="4096"
+# test_type="fillrandom,stats,readrandom,stats,wait,stats"
+# outfile="$outfilepath/db_bench_random_4KB.out"
+# RUN_ONE_TEST
 
-echo "------16KB random write/read-----"
-write_key_num="5000000"
-size="16384"
-test_type="fillrandom,readrandom"
-outfile="$outfilepath/db_bench_random_16KB.out"
-RUN_ONE_TEST
+# echo "------16KB random write/read-----"
+# write_key_num="5000000"
+# size="16384"
+# test_type="fillrandom,readrandom"
+# outfile="$outfilepath/db_bench_random_16KB.out"
+# RUN_ONE_TEST
 
-echo "------64KB random write/read-----"
-write_key_num="1250000"
-size="65536"
-test_type="fillrandom,readrandom"
-outfile="$outfilepath/db_bench_random_64KB.out"
-RUN_ONE_TEST
+# echo "------64KB random write/read-----"
+# write_key_num="1250000"
+# size="65536"
+# test_type="fillrandom,readrandom"
+# outfile="$outfilepath/db_bench_random_64KB.out"
+# RUN_ONE_TEST
 
-echo "------1KB sequential write/read-----"
-write_key_num="80000000"
-size="1024"
-test_type="fillseq,readseq"
-outfile="$outfilepath/db_bench_seq_1KB.out"
-RUN_ONE_TEST
+# echo "------1KB sequential write/read-----"
+# write_key_num="80000000"
+# size="1024"
+# test_type="fillseq,readseq"
+# outfile="$outfilepath/db_bench_seq_1KB.out"
+# RUN_ONE_TEST
 
-echo "------4KB sequential write/read-----"
-write_key_num="20000000"
-size="4096"
-test_type="fillseq,readseq"
-outfile="$outfilepath/db_bench_seq_4KB.out"
-RUN_ONE_TEST
+# echo "------4KB sequential write/read-----"
+# write_key_num="20000000"
+# size="4096"
+# test_type="fillseq,readseq"
+# outfile="$outfilepath/db_bench_seq_4KB.out"
+# RUN_ONE_TEST
 
-echo "------16KB sequential write/read-----"
-write_key_num="5000000"
-size="16384"
-test_type="fillseq,readseq"
-outfile="$outfilepath/db_bench_seq_16KB.out"
-RUN_ONE_TEST
+# echo "------16KB sequential write/read-----"
+# write_key_num="5000000"
+# size="16384"
+# test_type="fillseq,readseq"
+# outfile="$outfilepath/db_bench_seq_16KB.out"
+# RUN_ONE_TEST
 
-echo "------64KB sequential write/read-----"
-write_key_num="1250000"
-size="65536"
-test_type="fillseq,readseq"
-outfile="$outfilepath/db_bench_seq_64KB.out"
-RUN_ONE_TEST
+# echo "------64KB sequential write/read-----"
+# write_key_num="1250000"
+# size="65536"
+# test_type="fillseq,readseq"
+# outfile="$outfilepath/db_bench_seq_64KB.out"
+# RUN_ONE_TEST
 
 echo "------------YCSB------------"
 echo "-----1KB YCSB performance-----"

@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # save .log LOG CURRENT MANIFEST...
-db_path="/mnt/persist-memory/pmem_yjb_1/dbbench"
+db_path="/mnt/pmem0.1/pm_test_mio"
 # output file dir
-outfilepath="/home/jbyao/miodb/test"
+outfilepath="/home/wzh/mioDB/test"
 # output file
 outfile="$outfilepath/result.out"
 # db_bench binary path
-bench_path="/home/jbyao/miodb/build"
+bench_path="/home/wzh/mioDB/build"
 # total size of workload (Byte)
 test_size=81920000000
 # value size (Byte)
