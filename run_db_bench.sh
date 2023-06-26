@@ -4,7 +4,8 @@ KB=$((1024))
 MB=$(($KB*1024))
 GB=$(($MB*1024))
 # APP_PREFIX=sudo
-APP_PREFIX="numactl --cpunodebind=0 --membind=0"
+# APP_PREFIX="numactl --cpunodebind=0 --membind=0"
+APP_PREFIX=""
 
 db_path=$(pwd)
 db_bench=$db_path/build
@@ -457,11 +458,11 @@ MAKE
 SET_OUTPUT_PATH
 
 echo "chapter 4.1"
-# DB_BENCH_TEST
+DB_BENCH_TEST
 # DB_BENCH_THROUGHPUT
 
 echo "chapter 4.2"
-YCSB_TEST
+# YCSB_TEST
 # YCSB_TEST_LATENCY
 
 echo "chapter 4.3"
