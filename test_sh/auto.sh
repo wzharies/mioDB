@@ -65,62 +65,62 @@ RUN_ONE_TEST() {
 
 CREATE_OUTPUT_FILE_PATH
 
-# echo "------------db_bench------------"
-# echo "------1KB random write/read-----"
-# write_key_num="80000000"
-# size="1024"
-# test_type="fillrandom,readrandom"
-# outfile="$outfilepath/db_bench_random_1KB.out"
-# RUN_ONE_TEST
+echo "------------db_bench------------"
+echo "------1KB random write/read-----"
+write_key_num="80000000"
+size="1024"
+test_type="fillrandom,readrandom"
+outfile="$outfilepath/db_bench_random_1KB.out"
+RUN_ONE_TEST
 
-# echo "------4KB random write/read-----"
-# write_key_num="20000000"
-# size="4096"
-# test_type="fillrandom,stats,readrandom,stats,wait,stats"
-# outfile="$outfilepath/db_bench_random_4KB.out"
-# RUN_ONE_TEST
+echo "------4KB random write/read-----"
+write_key_num="20000000"
+size="4096"
+test_type="fillrandom,stats,readrandom,stats,wait,stats"
+outfile="$outfilepath/db_bench_random_4KB.out"
+RUN_ONE_TEST
 
-# echo "------16KB random write/read-----"
-# write_key_num="5000000"
-# size="16384"
-# test_type="fillrandom,readrandom"
-# outfile="$outfilepath/db_bench_random_16KB.out"
-# RUN_ONE_TEST
+echo "------16KB random write/read-----"
+write_key_num="5000000"
+size="16384"
+test_type="fillrandom,readrandom"
+outfile="$outfilepath/db_bench_random_16KB.out"
+RUN_ONE_TEST
 
-# echo "------64KB random write/read-----"
-# write_key_num="1250000"
-# size="65536"
-# test_type="fillrandom,readrandom"
-# outfile="$outfilepath/db_bench_random_64KB.out"
-# RUN_ONE_TEST
+echo "------64KB random write/read-----"
+write_key_num="1250000"
+size="65536"
+test_type="fillrandom,readrandom"
+outfile="$outfilepath/db_bench_random_64KB.out"
+RUN_ONE_TEST
 
-# echo "------1KB sequential write/read-----"
-# write_key_num="80000000"
-# size="1024"
-# test_type="fillseq,readseq"
-# outfile="$outfilepath/db_bench_seq_1KB.out"
-# RUN_ONE_TEST
+echo "------1KB sequential write/read-----"
+write_key_num="80000000"
+size="1024"
+test_type="fillseq,readseq"
+outfile="$outfilepath/db_bench_seq_1KB.out"
+RUN_ONE_TEST
 
-# echo "------4KB sequential write/read-----"
-# write_key_num="20000000"
-# size="4096"
-# test_type="fillseq,readseq"
-# outfile="$outfilepath/db_bench_seq_4KB.out"
-# RUN_ONE_TEST
+echo "------4KB sequential write/read-----"
+write_key_num="20000000"
+size="4096"
+test_type="fillseq,readseq"
+outfile="$outfilepath/db_bench_seq_4KB.out"
+RUN_ONE_TEST
 
-# echo "------16KB sequential write/read-----"
-# write_key_num="5000000"
-# size="16384"
-# test_type="fillseq,readseq"
-# outfile="$outfilepath/db_bench_seq_16KB.out"
-# RUN_ONE_TEST
+echo "------16KB sequential write/read-----"
+write_key_num="5000000"
+size="16384"
+test_type="fillseq,readseq"
+outfile="$outfilepath/db_bench_seq_16KB.out"
+RUN_ONE_TEST
 
-# echo "------64KB sequential write/read-----"
-# write_key_num="1250000"
-# size="65536"
-# test_type="fillseq,readseq"
-# outfile="$outfilepath/db_bench_seq_64KB.out"
-# RUN_ONE_TEST
+echo "------64KB sequential write/read-----"
+write_key_num="1250000"
+size="65536"
+test_type="fillseq,readseq"
+outfile="$outfilepath/db_bench_seq_64KB.out"
+RUN_ONE_TEST
 
 echo "------------YCSB------------"
 echo "-----1KB YCSB performance-----"
