@@ -27,7 +27,7 @@ bench_keys_per_datatable="2097152"
 # dram node in numa
 numa_dram_node=0
 # nvm node in numa
-numa_nvm_node=2
+numa_nvm_node=3
 # nvm next node in numa, we can use -1 to disable this
 numa_nvm_next_node=-1
 # the size of memtable in dram (Byte)

@@ -30,7 +30,7 @@ ycsb_input=1KB_ALL
 num_thread=1
 value_size=1024
 num_kvs=$((10*$MB))
-write_buffer_size=$((50*$MB))
+write_buffer_size=$((64*$MB))
 max_file_size=$((128*$MB))
 pm_size=$((180*$GB))
 bucket_nums=$((4*$MB)) # bucket_nums * 4 > nums_kvs
@@ -46,7 +46,7 @@ bench_keys_per_datatable="2097152"
 # dram node in numa
 numa_dram_node=0
 # nvm node in numa
-numa_nvm_node=2
+numa_nvm_node=3
 # nvm next node in numa, we can use -1 to disable this
 numa_nvm_next_node=-1
 
@@ -169,8 +169,8 @@ RUN_DB_BENCH() {
                 --dram_node=$numa_dram_node \
                 --nvm_node=$numa_nvm_node \
                 --nvm_next_node=$numa_nvm_next_node \
-
                 --max_file_size=$max_file_size \
+                --throughput=$throughput \
                 "
     cmd="$APP_PREFIX $db_bench/db_bench $parameters >> $output_file"
     echo $cmd >> $output_file
@@ -458,8 +458,8 @@ MAKE
 SET_OUTPUT_PATH
 
 echo "chapter 4.1"
-DB_BENCH_TEST
-# DB_BENCH_THROUGHPUT
+# DB_BENCH_TEST
+DB_BENCH_THROUGHPUT
 
 echo "chapter 4.2"
 # YCSB_TEST

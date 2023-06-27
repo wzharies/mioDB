@@ -119,6 +119,8 @@ static int FLAGS_nvm_node = 2;
 
 static int FLAGS_nvm_next_node = 4;
 
+static bool Throughput = false;
+
 // Use the db with the following name.
 static const char* FLAGS_db = nullptr;
 
@@ -744,6 +746,13 @@ class Benchmark {
     WriteBatch batch;
     Status s;
     int64_t bytes = 0;
+
+    int64_t bytes_this_batch = 0;
+
+    auto start_time = std::chrono::steady_clock::now();
+    auto last_report_time = start_time;
+    long long bytes_this_second = 0;
+
     for (int i = 0; i < num_; i += entries_per_batch_) {
       batch.Clear();
       for (int j = 0; j < entries_per_batch_; j++) {
@@ -751,10 +760,25 @@ class Benchmark {
         char key[100];
         std::snprintf(key, sizeof(key), "%016d", k);
         batch.Put(key, gen.Generate(value_size_));
-        bytes += value_size_ + strlen(key);
+        bytes_this_second += value_size_ + strlen(key);
         thread->stats.FinishedSingleOp();
       }
       s = db_->Write(write_options_, &batch);
+
+      if(Throughput){
+        bytes_this_second += bytes_this_batch;
+        auto now = std::chrono::steady_clock::now();
+        auto cur_elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
+        auto last_elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(last_report_time - start_time).count();
+        auto diff_time = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_report_time).count();
+        if (cur_elapsed_time / 1000 != last_elapsed_time / 1000) {
+          double throughput = bytes_this_second * 1.0 / 1024 / 1024 / (diff_time / 1000.0);
+          std::cout << "Throughput " << cur_elapsed_time / 1000 << " second: " << throughput << " MB per second" << std::endl;
+          last_report_time = now;
+          bytes_this_second = 0;
+        }
+      }
+      bytes += bytes_this_batch;
       if (!s.ok()) {
         std::fprintf(stderr, "put error: %s\n", s.ToString().c_str());
         std::exit(1);
@@ -1016,6 +1040,9 @@ int main(int argc, char** argv) {
 	  FLAGS_nvm_next_node = n;
 	} else if (sscanf(argv[i], "--bits_per_key=%d%c", &n, &junk) == 1) {
 	  FLAGS_bits_per_key = n;
+    } else if (sscanf(argv[i], "--throughput=%d%c", &n, &junk) == 1 &&
+               (n == 0 || n == 1)) {
+      Throughput = n;
     } else {
       std::fprintf(stderr, "Invalid flag '%s'\n", argv[i]);
       std::exit(1);
