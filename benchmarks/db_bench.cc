@@ -755,12 +755,13 @@ class Benchmark {
 
     for (int i = 0; i < num_; i += entries_per_batch_) {
       batch.Clear();
+      bytes_this_batch = 0;
       for (int j = 0; j < entries_per_batch_; j++) {
         const int k = seq ? i + j : (thread->rand.Next() % FLAGS_num);
         char key[100];
         std::snprintf(key, sizeof(key), "%016d", k);
         batch.Put(key, gen.Generate(value_size_));
-        bytes_this_second += value_size_ + strlen(key);
+        bytes_this_batch += value_size_ + strlen(key);
         thread->stats.FinishedSingleOp();
       }
       s = db_->Write(write_options_, &batch);

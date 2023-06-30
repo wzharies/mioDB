@@ -4,8 +4,8 @@ KB=$((1024))
 MB=$(($KB*1024))
 GB=$(($MB*1024))
 # APP_PREFIX=sudo
-# APP_PREFIX="numactl --cpunodebind=0 --membind=0"
-APP_PREFIX=""
+APP_PREFIX="numactl --cpunodebind=1 --membind=1"
+# APP_PREFIX=""
 
 db_path=$(pwd)
 db_bench=$db_path/build
@@ -44,7 +44,7 @@ comp_ratio="1"
 # theoretical KV num in penultimate layer
 bench_keys_per_datatable="2097152"
 # dram node in numa
-numa_dram_node=0
+numa_dram_node=1
 # nvm node in numa
 numa_nvm_node=3
 # nvm next node in numa, we can use -1 to disable this
@@ -241,10 +241,10 @@ MAKE() {
 DB_BENCH_TEST() {
     echo "------------db_bench------------"
     benchmarks="fillrandom,readrandom,stats"
-    echo "------256B random write/read-----"
-    output_file=$output_path/Rnd_NVM_256B
-    WRITE80G-256B
-    RUN_DB_BENCH
+    # echo "------256B random write/read-----"
+    # output_file=$output_path/Rnd_NVM_256B
+    # WRITE80G-256B
+    # RUN_DB_BENCH
 
     echo "------1KB random write/read-----"
     output_file=$output_path/Rnd_NVM_1K
@@ -268,10 +268,10 @@ DB_BENCH_TEST() {
 
 
     benchmarks="fillseq,readseq,stats"
-    echo "------256B random write/read-----"
-    output_file=$output_path/Seq_NVM_256B
-    WRITE80G-256B
-    RUN_DB_BENCH
+    # echo "------256B random write/read-----"
+    # output_file=$output_path/Seq_NVM_256B
+    # WRITE80G-256B
+    # RUN_DB_BENCH
 
     echo "------1KB sequential write/read-----"
     output_file=$output_path/Seq_NVM_1K
@@ -459,11 +459,11 @@ SET_OUTPUT_PATH
 
 echo "chapter 4.1"
 # DB_BENCH_TEST
-DB_BENCH_THROUGHPUT
+# DB_BENCH_THROUGHPUT
 
 echo "chapter 4.2"
 # YCSB_TEST
-# YCSB_TEST_LATENCY
+YCSB_TEST_LATENCY
 
 echo "chapter 4.3"
 # DB_BENCH_TEST_FLUSHSSD
