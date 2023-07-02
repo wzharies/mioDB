@@ -230,7 +230,7 @@ MAKE() {
   cmake -DCMAKE_BUILD_TYPE=Release .. 
 #   cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .. 
 
-  make -j32
+  make -j64
   cd ..
   cd $ycsb_path
   #make clean
@@ -458,11 +458,11 @@ MAKE
 SET_OUTPUT_PATH
 
 echo "chapter 4.1"
-# DB_BENCH_TEST
-# DB_BENCH_THROUGHPUT
+DB_BENCH_TEST
+DB_BENCH_THROUGHPUT
 
 echo "chapter 4.2"
-# YCSB_TEST
+YCSB_TEST
 YCSB_TEST_LATENCY
 
 echo "chapter 4.3"

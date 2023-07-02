@@ -25,7 +25,7 @@ comp_ratio="1"
 # theoretical KV num in penultimate layer
 bench_keys_per_datatable="2097152"
 # dram node in numa
-numa_dram_node=0
+numa_dram_node=1
 # nvm node in numa
 numa_nvm_node=3
 # nvm next node in numa, we can use -1 to disable this
