@@ -4,7 +4,7 @@ KB=$((1024))
 MB=$(($KB*1024))
 GB=$(($MB*1024))
 # APP_PREFIX=sudo
-APP_PREFIX="numactl --cpunodebind=1 --membind=1"
+APP_PREFIX="numactl --cpunodebind=0 --membind=0"
 # APP_PREFIX=""
 
 db_path=$(pwd)
@@ -44,7 +44,7 @@ comp_ratio="1"
 # theoretical KV num in penultimate layer
 bench_keys_per_datatable="2097152"
 # dram node in numa
-numa_dram_node=1
+numa_dram_node=0
 # nvm node in numa
 numa_nvm_node=3
 # nvm next node in numa, we can use -1 to disable this
@@ -464,14 +464,6 @@ DB_BENCH_THROUGHPUT
 echo "chapter 4.2"
 YCSB_TEST
 YCSB_TEST_LATENCY
-
-echo "chapter 4.3"
-# DB_BENCH_TEST_FLUSHSSD
-# YCSB_TEST_SSD
-
-echo "chapter 4.4"
-# CUCKOO_FILTER_ANALYSIS
-# THREAD_COUNT_ANALYSIS
 
 CLEAN_DB
 # sudo cp build/libleveldb.a /usr/local/lib/
