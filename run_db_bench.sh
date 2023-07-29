@@ -454,16 +454,39 @@ THREAD_COUNT_ANALYSIS(){
     leveldb_path=$pm_path;
 }
 
+function SMALL_VALUE_TEST(){
+    echo "------data size analysis-------"
+    benchmarks="fillrandom,readrandom,stats"
+    num_kvs=$((100*$MB))
+
+    echo "---- key100M_8B----"
+    output_file=$output_path/key100M_8B
+    value_size=$((8))
+    RUN_DB_BENCH
+
+    echo "---- key100M_32B----"
+    output_file=$output_path/key100M_32B
+    value_size=$((32))
+    RUN_DB_BENCH
+
+    echo "---- key100M_128B----"
+    output_file=$output_path/key100M_128B
+    value_size=$((128))
+    RUN_DB_BENCH
+}
+
 MAKE
 SET_OUTPUT_PATH
 
-echo "chapter 4.1"
-DB_BENCH_TEST
-DB_BENCH_THROUGHPUT
+# echo "chapter 4.1"
+# DB_BENCH_TEST
+# DB_BENCH_THROUGHPUT
 
-echo "chapter 4.2"
-YCSB_TEST
-YCSB_TEST_LATENCY
+# echo "chapter 4.2"
+# YCSB_TEST
+# YCSB_TEST_LATENCY
+
+SMALL_VALUE_TEST
 
 CLEAN_DB
 # sudo cp build/libleveldb.a /usr/local/lib/
